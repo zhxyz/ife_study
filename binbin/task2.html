@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IFE JavaScript Task 02</title>
+</head>
+<body>
+    <h3>污染城市列表</h3>
+    <ul id="aqi-list"></ul>
+
+<script type="text/javascript">
+    var aqiData = [
+       ["北京",90],
+       ["上海",50],
+       ["福州",10],
+       ["广州",50],
+       ["成都",90],
+       ["西安",100]
+    ];
+
+    (function(){
+        var N = [  
+                "零", "一", "二", "三", "四", "五", "六", "七", "八", "九"  
+            ]; 
+        function convertToChinese(num){  
+                var str = num.toString();  
+                var len = num.toString().length;  
+                var C_Num = [];  
+                for(var i = 0; i < len; i++){  
+                    C_Num.push(N[str.charAt(i)]);  
+                }  
+                return C_Num.join('');  
+        }  
+        aqiData.sort(function(a,b){return b[1]-a[1]});
+        var aqiArr = new Array();
+        for(var i=0;i<aqiData.length;i++){
+            if(aqiData[i][1]>60){
+                
+                aqiArr.push(aqiData[i]);
+            }
+            
+        }
+        var ul = document.getElementById("aqi-list");
+        
+        for(var i=0;i<aqiArr.length;i++){
+            
+            var li = document.createElement("li");
+            li.innerHTML = "第"+convertToChinese(i+1)+"名："+aqiArr[i][0]+","+aqiArr[i][1];
+            
+            ul.appendChild(li);
+        }
+        
+    })();
+
+    </script>
+</body>
+</html>
